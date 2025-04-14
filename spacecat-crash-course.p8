@@ -2,33 +2,32 @@ pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
 function _init()
-  sprite=1
-  stimer=0
-  ani_speed=10
-  first_frame=1
-  last_frame=4
+  init_health()
 end
 
 function _update()
-  
-  if btn(➡️) then
-		  if stimer<ani_speed then
-		    stimer+=1
-		  else
-		  		if sprite<last_frame then
-		    		sprite+=1
-		  		else
-		    		sprite=first_frame
-		  		end
-		    stimer=0
-		  end
-		end
-  
+  update_health()
 end
 
 function _draw()
   cls()
-  spr(sprite,63,63)
+  draw_health()
+end
+
+-->8
+function init_health()
+  health=100
+end
+
+function update_health()
+  health-=0.1
+  barw=(36*health)/100
+end
+
+function draw_health()
+  rect(44,60,84,68,6)
+  rectfill(46,62,46+barw,66,10)
+  print(health)
 end
 
 __gfx__
